@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size.height * 0.6;
+    final size = MediaQuery.of(context).size.height * 0.7;
     return Scaffold(
       body: Column(
         children: [
@@ -84,53 +84,57 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                SizedBox(height: 120),
+              ],
+            ),
+          ),
+          Spacer(),
 
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
                 Row(
-                  children: [
-                    Row(
-                      children: List.generate(
-                        3,
+                  children: List.generate(
+                    3,
                         (index) => AnimatedContainer(
-                          duration: Duration(milliseconds: 400),
-                          height: 14,
-                          width: 14,
-                          margin: EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: _currentIndex == index
-                                ? AppTheme.lightTheme.primaryColor
-                                : Colors.grey,
-                          ),
-                        ),
+                      duration: Duration(milliseconds: 400),
+                      height: 14,
+                      width: 14,
+                      margin: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: _currentIndex == index
+                            ? AppTheme.lightTheme.primaryColor
+                            : Colors.grey,
                       ),
                     ),
-                    Spacer(),
+                  ),
+                ),
+                Spacer(),
 
-                    _currentIndex > 0 ? TextButton(
-                      onPressed: () {
-                        _backSlide();
-                      },
-                      child: Text(
-                       "Back" ,style: TextStyle(color: Colors.grey),
-                      ),
-                    ) : SizedBox(),
-                    SizedBox(width: 8,),
-                    ElevatedButton(
-                      onPressed: () {
-                        _nextSlide();
-                      },
-                      child: Text(
-                        _currentIndex == slider.length - 1
-                            ? "Get Started"
-                            : "Next",
-                      ),
-                    ),
-                  ],
+                _currentIndex > 0 ? TextButton(
+                  onPressed: () {
+                    _backSlide();
+                  },
+                  child: Text(
+                    "Back" ,style: TextStyle(color: Colors.grey),
+                  ),
+                ) : SizedBox(),
+                SizedBox(width: 8,),
+                ElevatedButton(
+                  onPressed: () {
+                    _nextSlide();
+                  },
+                  child: Text(
+                    _currentIndex == slider.length - 1
+                        ? "Get Started"
+                        : "Next",
+                  ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 40,)
         ],
       ),
     );

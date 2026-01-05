@@ -6,6 +6,12 @@ class ThemeProvider extends ChangeNotifier{
   ThemeMode get themeMode => _themeMode;
 
 
+  bool isDark(BuildContext context) {
+    if (_themeMode == ThemeMode.system) {
+      return MediaQuery.of(context).platformBrightness == Brightness.dark;
+    }
+    return _themeMode == ThemeMode.dark;
+  }
 
 
 
