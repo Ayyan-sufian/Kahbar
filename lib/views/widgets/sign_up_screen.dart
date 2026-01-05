@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/model_view/theme_provider.dart';
-import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomGoogleButton.dart';
+import 'package:kabar/views/login_screen.dart';
 import 'package:kabar/views/widgets/CustomLoginButtom.dart';
-import 'package:kabar/views/widgets/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../theme/app_theme.dart';
+import 'CustomGoogleButton.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool isVisible = true;
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool remind = false;
   bool errorUser = false;
   bool errorPass = false;
-  bool remind = false;
+  bool errorConfirmPass = false;
+  bool isVisible = true;
+  bool isConfirmVisible = true;
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,40 +36,41 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30),
-            Text("Hello", style: Theme.of(context).textTheme.headlineLarge),
             Text(
-              "Again!",
+              "Hello!",
               style: Theme.of(
                 context,
               ).textTheme.headlineLarge!.copyWith(color: Color(0xff1877F2)),
             ),
             SizedBox(height: 10),
             Text(
-              "Welcome back you’ve\nbeen missed",
+              "Signup to get Started",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             SizedBox(height: 52),
             Text("Username*", style: Theme.of(context).textTheme.bodySmall),
             TextField(
+              controller: nameController,
               decoration: InputDecoration(
                 helper: errorUser
                     ? Row(
-                        children: [
-                          Icon(Icons.error_outline, color: AppTheme.errorColor),
-                          SizedBox(width: 5),
-                          Text(
-                            "Invalid username",
-                            style: Theme.of(context).textTheme.bodySmall!
-                                .copyWith(color: AppTheme.errorColor),
-                          ),
-                        ],
-                      )
+                  children: [
+                    Icon(Icons.error_outline, color: AppTheme.errorColor),
+                    SizedBox(width: 5),
+                    Text(
+                      "Invalid username",
+                      style: Theme.of(context).textTheme.bodySmall!
+                          .copyWith(color: AppTheme.errorColor),
+                    ),
+                  ],
+                )
                     : null,
               ),
             ),
             SizedBox(height: 16),
             Text("Password*", style: Theme.of(context).textTheme.bodySmall),
             TextField(
+              controller: passController,
               obscureText: isVisible,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
@@ -77,20 +85,51 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 error: errorPass
                     ? Row(
-                        children: [
-                          Icon(Icons.error_outline, color: AppTheme.errorColor),
-                          SizedBox(width: 5),
-                          Text(
-                            "Invalid password",
-                            style: Theme.of(context).textTheme.bodySmall!
-                                .copyWith(color: AppTheme.errorColor),
-                          ),
-                        ],
-                      )
+                  children: [
+                    Icon(Icons.error_outline, color: AppTheme.errorColor),
+                    SizedBox(width: 5),
+                    Text(
+                      "Invalid password",
+                      style: Theme.of(context).textTheme.bodySmall!
+                          .copyWith(color: AppTheme.errorColor),
+                    ),
+                  ],
+                )
                     : null,
               ),
             ),
             SizedBox(height: 16),
+            Text("Confirm Password*", style: Theme.of(context).textTheme.bodySmall),
+            TextField(
+              controller: confirmPassController,
+              obscureText: isConfirmVisible,
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    isConfirmVisible ? Icons.visibility_off_outlined : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isConfirmVisible = !isConfirmVisible;
+                    });
+                  },
+                ),
+                error: errorConfirmPass
+                    ? Row(
+                  children: [
+                    Icon(Icons.error_outline, color: AppTheme.errorColor),
+                    SizedBox(width: 5),
+                    Text(
+                      "Password is not same",
+                      style: Theme.of(context).textTheme.bodySmall!
+                          .copyWith(color: AppTheme.errorColor),
+                    ),
+                  ],
+                )
+                    : null,
+              ),
+            ),
+            SizedBox(height: 8),
             Row(
               children: [
                 Checkbox(
@@ -108,21 +147,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Spacer(),
-                TextButton(
-                  onPressed: () {}, // add navigation here
-                  child: Text(
-                    "Forget Password ?",
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: AppTheme.primaryColor,
-                    ),
-                  ),
-                ),
+
               ],
             ),
             SizedBox(height: 16),
             CustomLoginButton(
-              buttonTitle: 'Login',
+              buttonTitle: 'Sign up',
               onPressed: () {
+                if(passController.text != confirmPassController.text){
+                  setState(() {
+                    errorConfirmPass = true;
+                  });
+                }else{
+                  setState(() {
+                    errorConfirmPass = false;
+                  });
+                }
                 print("ayan login button pressed");
               },
             ),
@@ -158,21 +198,21 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have account ?",
+              children: [
+                Text(
+                    "Already have account ?",
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall
-                  ),
-                  TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
-                  }, child: Text("Sign up",
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall!.copyWith(color: AppTheme.primaryColor),))
-                ],
-              ),
+                ),
+                TextButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                }, child: Text("Login",
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall!.copyWith(color: AppTheme.primaryColor),))
+              ],
+            ),
           ],
         ),
       ),
