@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/theme_provider.dart';
-import 'package:kabar/views/forget_screen.dart';
-import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomGoogleButton.dart';
+import 'package:kabar/views/login_screen.dart';
 import 'package:kabar/views/widgets/CustomLoginButtom.dart';
-import 'package:kabar/views/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import 'theme/app_theme.dart';
+import 'widgets/CustomGoogleButton.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool isVisible = true;
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool remind = false;
   bool errorUser = false;
   bool errorPass = false;
-  bool remind = false;
+  bool errorConfirmPass = false;
+  bool isVisible = true;
+  bool isConfirmVisible = true;
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,40 +39,47 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 30),
-              Text(AppConstants.lgHelloTxt, style: Theme.of(context).textTheme.headlineLarge),
               Text(
-                AppConstants.lgAgainTxt,
+                AppConstants.suHelloTxt,
                 style: Theme.of(
                   context,
                 ).textTheme.headlineLarge!.copyWith(color: Color(0xff1877F2)),
               ),
               SizedBox(height: 10),
               Text(
-                AppConstants.lgContentTxt,
+                AppConstants.suContentTxt,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               SizedBox(height: 52),
+              Text(AppConstants.suNameTxt, style: Theme.of(context).textTheme.bodySmall),
+              TextField(
+                controller: nameController,
+              ),
+              SizedBox(height: 16),
               Text(AppConstants.fPEmailTxt, style: Theme.of(context).textTheme.bodySmall),
               TextField(
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   helper: errorUser
                       ? Row(
-                          children: [
-                            Icon(Icons.error_outline, color: AppTheme.errorColor),
-                            SizedBox(width: 5),
-                            Text(
-                              AppConstants.lgInvalidEmailTxt,
-                              style: Theme.of(context).textTheme.bodySmall!
-                                  .copyWith(color: AppTheme.errorColor),
-                            ),
-                          ],
-                        )
+                    children: [
+                      Icon(Icons.error_outline, color: AppTheme.errorColor),
+                      SizedBox(width: 5),
+                      Text(
+                        AppConstants.lgInvalidEmailTxt,
+                        style: Theme.of(context).textTheme.bodySmall!
+                            .copyWith(color: AppTheme.errorColor),
+                      ),
+                    ],
+                  )
                       : null,
                 ),
               ),
               SizedBox(height: 16),
               Text(AppConstants.lgPassTxt, style: Theme.of(context).textTheme.bodySmall),
               TextField(
+                controller: passController,
                 obscureText: isVisible,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
@@ -80,20 +94,51 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   error: errorPass
                       ? Row(
-                          children: [
-                            Icon(Icons.error_outline, color: AppTheme.errorColor),
-                            SizedBox(width: 5),
-                            Text(
-                              AppConstants.lgInvalidPassTxt,
-                              style: Theme.of(context).textTheme.bodySmall!
-                                  .copyWith(color: AppTheme.errorColor),
-                            ),
-                          ],
-                        )
+                    children: [
+                      Icon(Icons.error_outline, color: AppTheme.errorColor),
+                      SizedBox(width: 5),
+                      Text(
+                        AppConstants.lgInvalidPassTxt,
+                        style: Theme.of(context).textTheme.bodySmall!
+                            .copyWith(color: AppTheme.errorColor),
+                      ),
+                    ],
+                  )
                       : null,
                 ),
               ),
               SizedBox(height: 16),
+              Text(AppConstants.suConfirmPassTxt, style: Theme.of(context).textTheme.bodySmall),
+              TextField(
+                controller: confirmPassController,
+                obscureText: isConfirmVisible,
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      isConfirmVisible ? Icons.visibility_off_outlined : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isConfirmVisible = !isConfirmVisible;
+                      });
+                    },
+                  ),
+                  error: errorConfirmPass
+                      ? Row(
+                    children: [
+                      Icon(Icons.error_outline, color: AppTheme.errorColor),
+                      SizedBox(width: 5),
+                      Text(
+                        "Password is not same",
+                        style: Theme.of(context).textTheme.bodySmall!
+                            .copyWith(color: AppTheme.errorColor),
+                      ),
+                    ],
+                  )
+                      : null,
+                ),
+              ),
+              SizedBox(height: 8),
               Row(
                 children: [
                   Checkbox(
@@ -111,23 +156,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetScreen(),));
-                    },
-                    child: Text(
-                      AppConstants.forgotPasswordTxt,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: AppTheme.primaryColor,
-                      ),
-                    ),
-                  ),
+
                 ],
               ),
               SizedBox(height: 16),
               CustomLoginButton(
-                buttonTitle: AppConstants.lgLoginTxt,
+                buttonTitle: AppConstants.lgSignUpTxt,
                 onPressed: () {
+                  if(passController.text != confirmPassController.text){
+                    setState(() {
+                      errorConfirmPass = true;
+                    });
+                  }else{
+                    setState(() {
+                      errorConfirmPass = false;
+                    });
+                  }
                   print("ayan login button pressed");
                 },
               ),
@@ -163,21 +207,21 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppConstants.lgHaveNoAccTxt,
+                children: [
+                  Text(
+                      AppConstants.suAlreadyHaveAccTxt,
                       style: Theme.of(
                         context,
                       ).textTheme.bodySmall
-                    ),
-                    TextButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
-                    }, child: Text(AppConstants.lgSignUpTxt,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall!.copyWith(color: AppTheme.primaryColor),))
-                  ],
-                ),
+                  ),
+                  TextButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                  }, child: Text(AppConstants.lgLoginTxt,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall!.copyWith(color: AppTheme.primaryColor),))
+                ],
+              ),
             ],
           ),
         ),

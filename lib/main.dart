@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kabar/model_view/theme_provider.dart';
 import 'package:kabar/views/splash_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
+import 'package:kabar/views/verfication_screen.dart';
 import 'package:provider/provider.dart';
 
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        home: SplashScreen()
+        home: VerificationScreen(email: "")
       ),
     );
   }

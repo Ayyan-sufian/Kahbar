@@ -6,7 +6,7 @@ class AppTheme {
   static const errorColor = Color(0xFFC30052);
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Color(0xFF1877F2),
+    primaryColor: Color(0xFF4E4B66),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
@@ -15,6 +15,11 @@ class AppTheme {
     textTheme: TextTheme(
       headlineLarge: GoogleFonts.poppins(
         fontSize: 48,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF4E4B66),
+      ),
+      headlineMedium: GoogleFonts.poppins(
+        fontSize: 32,
         fontWeight: FontWeight.bold,
         color: Color(0xFF4E4B66),
       ),
@@ -41,6 +46,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        maximumSize: Size(500, 50),
         backgroundColor: Color(0xFF1877F2),
         foregroundColor: Colors.white,
         shape: ContinuousRectangleBorder(
@@ -76,7 +82,7 @@ class AppTheme {
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: Color(0xFF1877F2),
+    primaryColor: Color(0xFFE4E6EB),
     scaffoldBackgroundColor: Color(0xFF1C1E21),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFF1C1E21),
@@ -116,6 +122,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        maximumSize: Size(500, 50),
         backgroundColor: Color(0xFF1877F2),
         foregroundColor: Colors.white,
         shape: ContinuousRectangleBorder(
