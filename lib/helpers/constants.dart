@@ -41,7 +41,12 @@ class AppConstants{
   /// Congratulations screen
   static const String congratulationTxt = "Congratulations!";
   static const String congratulationContentTxt = "Your account is ready to use";
-  static const String csGoHomeTxt = "Your account is ready to use";
+  static const String csGoHomeTxt = "Go to Homepage";
+
+  /// Country screen
+  static const String ctrHeadingTxt = "Select your Country";
+  static const String tpsHeadingTxt = "Select your Topics";
+  static const String ctrHintTxt = "Search";
 }
 class CustomImagesPath{
   static const String appLogoImage= "assets/img/logo.svg";

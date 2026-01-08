@@ -30,7 +30,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
+                SizedBox(height: size.height * 0.3,),
                 SvgPicture.asset(CustomImagesPath.appLogoImage),
                 SizedBox(height: 65,),
                 Text(AppConstants.congratulationTxt,style: Theme.of(context).textTheme.headlineMedium,),
@@ -39,7 +39,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                 Spacer(),
                 CustomLoginButton(onPressed: (){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CounterScreen(),));
-                }, buttonTitle: AppConstants.csGoHomeTxt)
+                }, buttonTitle: AppConstants.csGoHomeTxt),
+                SizedBox(height: 24 ,)
               ],
             ),
           ),

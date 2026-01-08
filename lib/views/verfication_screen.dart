@@ -22,43 +22,45 @@ class _VerificationScreenState extends State<VerificationScreen>
     with SingleTickerProviderStateMixin {
   final int countdownSeconds = 60;
 
-  late final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController otpController = TextEditingController();
+
+  late AnimationController _controller;
+
+  bool inputFull = false;
+
+  int get remaining =>
+      (countdownSeconds * (1 - _controller.value)).ceil();
+
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    formKey = GlobalKey<FormState>();
-    ticker = createTicker((elapsed) {
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: countdownSeconds),
+    )..addListener(() {
       if (!mounted) return;
-
-      setState(() {
-        _elapsed = elapsed;
-
-        if (_elapsed.inSeconds >= countdownSeconds) {
-          ticker.stop();
-        }
-      });
+      setState(() {});
     });
 
-    ticker.start();
+    _controller.forward();
   }
 
-  final TextEditingController otpController = TextEditingController();
-  bool inputFull = false;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    otpController.dispose();
+    super.dispose();
+  }
+
   bool isCorrect = false;
 
   void passCorrect() {
     isCorrect = true;
   }
-
-  late Ticker ticker;
-
-  // elapsed duration, updates on every frame change.
-  Duration _elapsed = Duration.zero;
-
-  double get _countdownProgress =>
-      _elapsed.inMilliseconds / (1000 * countdownSeconds.toDouble());
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,6 @@ class _VerificationScreenState extends State<VerificationScreen>
     final size = MediaQuery.of(context).size;
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
-    final remaining = countdownSeconds - _elapsed.inSeconds;
     return Scaffold(
       body: SafeArea(
         bottom: false,

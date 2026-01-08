@@ -30,12 +30,12 @@ class AppTheme {
       ),
       bodyLarge: GoogleFonts.poppins(
         fontSize: 20,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         color: Color(0xFF4E4B66),
       ),
       bodyMedium: GoogleFonts.poppins(
         fontSize: 16,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         color: Color(0xFF4E4B66),
       ),
       bodySmall: GoogleFonts.poppins(
@@ -57,6 +57,11 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.white,
+      hintStyle: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Color(0xFF4E4B66),
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(color: Color(0xFF4E4B66)),
@@ -106,12 +111,12 @@ class AppTheme {
       ),
       bodyLarge: GoogleFonts.poppins(
         fontSize: 20,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         color: Color(0xFFB0B3B8),
       ),
       bodyMedium: GoogleFonts.poppins(
         fontSize: 16,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         color: Color(0xFFB0B3B8),
       ),
       bodySmall: GoogleFonts.poppins(
@@ -133,6 +138,11 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Color(0xFF3A3B3C),
+      hintStyle: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Color(0xFFFFFFFF),
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(color: Color(0xFF3A3B3C)),
