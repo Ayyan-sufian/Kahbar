@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kabar/views/news_source_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomLoginButtom.dart';
+import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/constants.dart';
 import '../model_view/theme_provider.dart';
-import '../models/chips_moldel.dart';
+import '../models/chips_model.dart';
 
 class TopicsScreen extends StatefulWidget {
   const TopicsScreen({super.key});
@@ -18,16 +19,25 @@ class _TopicsScreenState extends State<TopicsScreen> {
   final TextEditingController topicController = TextEditingController();
 
   List<ChipModel> chips = [
-    ChipModel(id: 1, name: 'TEST', isSelected: false),
-    ChipModel(id: 2, name: 'TE sdfndhfshfos ST', isSelected: false),
-    ChipModel(id: 3, name: 'TEdhfsfisjafuwsiofjoljfohfuhrfio ifjoierfwefeohrfewrhf rfheroigegue rgegioeST', isSelected: false),
-    ChipModel(id: 4, name: 'TEST', isSelected: false),
+    ChipModel(id: 1, name: AppConstants.tpsNationalTxt, isSelected: false),
+    ChipModel(id: 2, name: AppConstants.tpsInternationalTxt, isSelected: false),
+    ChipModel(id: 3, name: AppConstants.tpsSportTxt, isSelected: false),
+    ChipModel(id: 4, name: AppConstants.tpsLifestyleTxt, isSelected: false),
+    ChipModel(id: 5, name: AppConstants.tpsBusinessTxt, isSelected: false),
+    ChipModel(id: 6, name: AppConstants.tpsHealthTxt, isSelected: false),
+    ChipModel(id: 7, name: AppConstants.tpsFashionTxt, isSelected: false),
+    ChipModel(id: 8, name: AppConstants.tpsTechnologyTxt, isSelected: false),
+    ChipModel(id: 9, name: AppConstants.tpsScienceTxt, isSelected: false),
+    ChipModel(id: 10, name: AppConstants.tpsArtTxt, isSelected: false),
+    ChipModel(id: 11, name: AppConstants.tpsPoliticsTxt, isSelected: false),
   ];
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       body: SafeArea(
         left: false,
@@ -47,7 +57,11 @@ class _TopicsScreenState extends State<TopicsScreen> {
                   Spacer(),
                   Text(
                     AppConstants.tpsHeadingTxt,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(
                       color: themeProvider.isDark(context)
                           ? Colors.white
                           : Colors.black,
@@ -57,52 +71,20 @@ class _TopicsScreenState extends State<TopicsScreen> {
                   Spacer(),
                 ],
               ),
-              InkWell(
-                onTap: () {},
-                child: AbsorbPointer(
-                  absorbing: true,
-                  child: TextField(
-                    controller: topicController,
-                    decoration: InputDecoration(
-                      hintText: AppConstants.ctrHintTxt,
-                      suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.search,
-                          color: themeProvider.isDark(context)
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
 
               const SizedBox(height: 16),
               Wrap(
-                children: [
-                 Chips(id: chips[0].id, title: chips[0].name, isSelected: chips[0].isSelected, onTap: () {
-                   setState(() {
-                     chips[0].isSelected = !chips[0].isSelected; // toggle
-                   });
-                 },),
-                  Chips(id: chips[1].id, title: chips[1].name, isSelected: chips[1].isSelected, onTap: () {
-                   setState(() {
-                     chips[1].isSelected = !chips[1].isSelected; // toggle
-                   });
-                 },),
-                  Chips(id: chips[2].id, title: chips[2].name, isSelected: chips[2].isSelected, onTap: () {
-                   setState(() {
-                     chips[2].isSelected = !chips[2].isSelected; // toggle
-                   });
-                 },),
-                  Chips(id: chips[3].id, title: chips[3].name, isSelected: chips[3].isSelected, onTap: () {
-                   setState(() {
-                     chips[3].isSelected = !chips[3].isSelected; // toggle
-                   });
-                 },),
-                ],
+                spacing: 8,
+                 children: List.generate(chips.length, (index) {
+                    return Chips(id: chips[index].id,
+                        title: chips[index].name,
+                        isSelected: chips[index].isSelected,
+                        onTap: (){
+                      setState(() {
+                        chips[index].isSelected = !chips[index].isSelected;
+                      });
+                        });
+                  },)
               ),
 
               Spacer(),
@@ -123,13 +105,13 @@ class _TopicsScreenState extends State<TopicsScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: CustomLoginButton(
                       onPressed: () {
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) =>
-                        //         CongratulationsScreen(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                               NewsSourceScreen()
+                          ),
+                        );
                       },
                       buttonTitle: AppConstants.hsNextBtnTxt,
                     ),
@@ -176,7 +158,11 @@ class Chips extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            style: Theme
+                .of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(
               color: isSelected
                   ? Colors.white
                   : AppTheme.primaryColor,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/theme_provider.dart';
 import 'package:kabar/views/login_screen.dart';
-import 'package:kabar/views/widgets/CustomLoginButtom.dart';
+import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:provider/provider.dart';
 
 import 'theme/app_theme.dart';
@@ -129,7 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Icon(Icons.error_outline, color: AppTheme.errorColor),
                       SizedBox(width: 5),
                       Text(
-                        "Password is not same",
+                        AppConstants.suPassNotSameTxt,
                         style: Theme.of(context).textTheme.bodySmall!
                             .copyWith(color: AppTheme.errorColor),
                       ),
@@ -190,7 +190,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgFacebookTxt,
                     onPressed: () {
-                      print("ayan facebook button pressed");
                     },
                     imgPath: CustomImagesPath.lgFacebookImage,
                   ),
@@ -198,7 +197,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgGoogleTxt,
                     onPressed: () {
-                      print("ayan Google button pressed");
                     },
                     imgPath: CustomImagesPath.lgGoogleImage,
                   ),

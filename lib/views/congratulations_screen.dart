@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
-import 'package:kabar/views/counter_screen.dart';
-import 'package:kabar/views/widgets/CustomLoginButtom.dart';
+import 'package:kabar/views/country_screen.dart';
+import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CongratulationsScreen extends StatefulWidget {

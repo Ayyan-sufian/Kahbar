@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:kabar/views/congratulations_screen.dart';
+import 'package:kabar/views/rest_pass_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomLoginButtom.dart';
+import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
@@ -218,7 +217,7 @@ class _VerificationScreenState extends State<VerificationScreen>
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              CongratulationsScreen(),
+                                              RestPassScreen(),
                                         ),
                                       )
                                     : null;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/theme_provider.dart';
+import 'package:kabar/views/country_screen.dart';
 import 'package:kabar/views/forget_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
 import 'package:kabar/views/widgets/CustomGoogleButton.dart';
-import 'package:kabar/views/widgets/CustomLoginButtom.dart';
+import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:kabar/views/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomLoginButton(
                 buttonTitle: AppConstants.lgLoginTxt,
                 onPressed: () {
-                  print("ayan login button pressed");
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CounterScreen(),));
                 },
               ),
               SizedBox(height: 16),
@@ -146,7 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgFacebookTxt,
                     onPressed: () {
-                      print("ayan facebook button pressed");
                     },
                     imgPath: CustomImagesPath.lgFacebookImage,
                   ),
@@ -154,7 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgGoogleTxt,
                     onPressed: () {
-                      print("ayan Google button pressed");
                     },
                     imgPath: CustomImagesPath.lgGoogleImage,
                   ),

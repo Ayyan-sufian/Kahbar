@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/theme_provider.dart';
 import 'package:kabar/views/topics_screen.dart';
-import 'package:kabar/views/widgets/CustomLoginButtom.dart';
+import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:provider/provider.dart';
 
 
@@ -127,7 +127,7 @@ class _CounterScreenState extends State<CounterScreen> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -31,6 +31,7 @@ class AppConstants{
   static const String suNameTxt = "Name*";
   static const String suConfirmPassTxt = "Confirm Password*";
   static const String suAlreadyHaveAccTxt = "Already have account ?";
+  static const String suPassNotSameTxt = "Password is not same";
 
   /// Verification screen
   static const String vsOtpTxt = "OTP Verification";
@@ -45,8 +46,35 @@ class AppConstants{
 
   /// Country screen
   static const String ctrHeadingTxt = "Select your Country";
-  static const String tpsHeadingTxt = "Select your Topics";
   static const String ctrHintTxt = "Search";
+
+  /// Topics screen
+  static const String tpsHeadingTxt = "Select your Topics";
+  static const String tpsNationalTxt = "National";
+  static const String tpsInternationalTxt = "International";
+  static const String tpsSportTxt = "Sport";
+  static const String tpsLifestyleTxt = "Lifestyle";
+  static const String tpsBusinessTxt = "Business";
+  static const String tpsHealthTxt = "Health";
+  static const String tpsFashionTxt = "Fashion";
+  static const String tpsTechnologyTxt = "Technology";
+  static const String tpsScienceTxt = "Science";
+  static const String tpsArtTxt = "Art";
+  static const String tpsPoliticsTxt = "Politics";
+
+  /// Rest pass screen
+  static const String rpsHeadingTxt = "Reset Password";
+  static const String rpsNewPassTxt = "New Password";
+  static const String rpsConfirmNewPassTxt = "Confirm new Password";
+  static const String rpsBtnTxt = "Submit";
+
+  /// News Source screen
+  static const String nssHeadingTxt = "Choose your News Sources";
+  static const String nssFollowTxt = "Follow";
+  static const String nssFollowingTxt = "Following";
+  static const String nssBccTxt = "BCC";
+  static const String nssCnbcTxt = "CNBC";
+  static const String nssCnnTxt = "CNN";
 }
 class CustomImagesPath{
   static const String appLogoImage= "assets/img/logo.svg";
@@ -57,4 +85,9 @@ class CustomImagesPath{
   /// Login screen img
   static const String lgFacebookImage = "facebook.svg";
   static const String lgGoogleImage = "google.svg";
+
+  /// News source screen img
+  static const String nssBccImage = "assets/img/bcc_logo.svg";
+  static const String nssCnnImage = "assets/img/cnn.svg";
+  static const String nssCnbcImage = "assets/img/cbnc.svg";
 }
