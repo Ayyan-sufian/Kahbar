@@ -1,6 +1,6 @@
 class ArticleModel {
-  final String id;           // unique id for the article or source
-  final String name;         // source name
+  final String id;
+  final String name;
   final String title;
   final String description;
   final String urlToImage;
@@ -8,6 +8,7 @@ class ArticleModel {
   final String author;
   final String content;
   final String publishedAt;
+  bool isSelected;
 
   ArticleModel({
     required this.id,
@@ -19,6 +20,7 @@ class ArticleModel {
     required this.author,
     required this.content,
     required this.publishedAt,
+    this.isSelected = false
   });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class ArticleModel {
       author: json['author'] ?? '',
       content: json['content'] ?? '',
       publishedAt: json['publishedAt'] ?? '',
+      isSelected: false
     );
   }
 }

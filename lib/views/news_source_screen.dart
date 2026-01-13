@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
+import 'package:kabar/models/artical_model.dart';
 import 'package:kabar/services/news_api_service.dart';
+import 'package:kabar/views/home_page.dart';
 import 'package:kabar/views/theme/app_theme.dart';
 import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +21,15 @@ class NewsSourceScreen extends StatefulWidget {
 class _NewsSourceScreenState extends State<NewsSourceScreen> {
   final TextEditingController newsSearchController = TextEditingController();
   List<NewsModel> cards = [];
+  List<ArticleModel> articlesCard = [];
   bool isLoading = true;
+
 
   @override
   void initState() {
     super.initState();
     loadNews();
+    loadArticles();
   }
 
   Future<void> loadNews() async {
@@ -33,6 +38,22 @@ class _NewsSourceScreenState extends State<NewsSourceScreen> {
       final List sourcesList = response.data['sources'];
       setState(() {
         cards = sourcesList.map((json) => NewsModel.fromJson(json)).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print("Error fetching news: $e");
+    }
+  }
+
+Future<void> loadArticles() async {
+    try {
+      final response = await NewsApiService().getArticles();
+      final List articlesList = response.data['articles'];
+      setState(() {
+        articlesCard = articlesList.map((json) => ArticleModel.fromJson(json)).toList();
         isLoading = false;
       });
     } catch (e) {
@@ -110,9 +131,9 @@ class _NewsSourceScreenState extends State<NewsSourceScreen> {
                           crossAxisSpacing: 10,
                           childAspectRatio: 0.6,
                         ),
-                        itemCount: cards.length,
+                        itemCount: articlesCard.length,
                         itemBuilder: (context, index) {
-                          final c = cards[index];
+                          final c = articlesCard[index];
                           return Cards(
                             id: c.id,
                             imagePath: CustomImagesPath.nssCnbcImage,
@@ -147,7 +168,8 @@ class _NewsSourceScreenState extends State<NewsSourceScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NewsSourceScreen(),
+                            builder: (context) => HomePage(),
+
                           ),
                         );
                       },

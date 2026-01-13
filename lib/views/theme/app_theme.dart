@@ -5,6 +5,7 @@ class AppTheme {
   static const primaryColor = Color(0xFF1877F2);
   static const errorColor = Color(0xFFC30052);
   static const greyColor = Color(0xFFEEF1F4);
+  static const blackColor = Color(0xFF000000);
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: Color(0xFF4E4B66),
@@ -29,6 +30,7 @@ class AppTheme {
         fontWeight: FontWeight.w700,
         color: Colors.black,
       ),
+
       bodyLarge: GoogleFonts.poppins(
         fontSize: 20,
         fontWeight: FontWeight.w600,

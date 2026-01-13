@@ -75,6 +75,11 @@ class AppConstants{
   static const String nssBccTxt = "BCC";
   static const String nssCnbcTxt = "CNBC";
   static const String nssCnnTxt = "CNN";
+
+  /// Home Page
+  static const String hpsTrendingTxt = "Trending";
+  static const String hpsSeeAllTxt = "See all";
+  static const String hpsLatestTxt = "Latest";
 }
 class CustomImagesPath{
   static const String appLogoImage= "assets/img/logo.svg";
@@ -90,4 +95,7 @@ class CustomImagesPath{
   static const String nssBccImage = "assets/img/bcc_logo.svg";
   static const String nssCnnImage = "assets/img/cnn.svg";
   static const String nssCnbcImage = "assets/img/cbnc.svg";
+
+  /// Home Page
+  static const String hpsMenuImage = "assets/img/menu.svg";
 }
