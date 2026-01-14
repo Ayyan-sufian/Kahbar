@@ -25,44 +25,8 @@ class _NewsSourceScreenState extends State<NewsSourceScreen> {
   bool isLoading = true;
 
 
-  @override
-  void initState() {
-    super.initState();
-    loadNews();
-    loadArticles();
-  }
 
-  Future<void> loadNews() async {
-    try {
-      final response = await NewsApiService().getNews();
-      final List sourcesList = response.data['sources'];
-      setState(() {
-        cards = sourcesList.map((json) => NewsModel.fromJson(json)).toList();
-        isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
-      print("Error fetching news: $e");
-    }
-  }
 
-Future<void> loadArticles() async {
-    try {
-      final response = await NewsApiService().getArticles();
-      final List articlesList = response.data['articles'];
-      setState(() {
-        articlesCard = articlesList.map((json) => ArticleModel.fromJson(json)).toList();
-        isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
-      print("Error fetching news: $e");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
