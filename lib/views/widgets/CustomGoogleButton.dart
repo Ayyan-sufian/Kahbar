@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kabar/model_view/theme_bloc/theme_bloc.dart';
+import 'package:kabar/views/theme/app_theme.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
-import '../../model_view/theme_provider.dart';
 
 class CustomGoogleButton extends StatelessWidget {
   const CustomGoogleButton({
     super.key,
-    required this.themeProvider,
     required this.buttonTitle,
     required this.onPressed,
     required this.imgPath,
   });
 
-  final ThemeProvider themeProvider;
   final String buttonTitle;
   final VoidCallback onPressed;
   final String imgPath;
@@ -25,9 +25,9 @@ class CustomGoogleButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: themeProvider.isDark(context)
-              ? Color(0xFFEEF1F4)
-              : Color(0xFFEEF1F4),
+          backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? AppTheme.darkModeWhite
+            : AppTheme.blackColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

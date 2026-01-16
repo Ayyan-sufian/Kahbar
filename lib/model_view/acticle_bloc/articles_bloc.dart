@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:kabar/models/artical_model.dart';
 import 'package:meta/meta.dart';
 
-import '../helpers/constants.dart';
-import '../services/news_api_service.dart';
+import '../../helpers/constants.dart';
+import '../../services/news_api_service.dart';
 
 part 'articles_event.dart';
 part 'articles_state.dart';

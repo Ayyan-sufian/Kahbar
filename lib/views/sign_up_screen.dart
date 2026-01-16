@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
-import 'package:kabar/model_view/theme_provider.dart';
 import 'package:kabar/views/login_screen.dart';
 import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +29,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -187,14 +185,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomGoogleButton(
-                    themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgFacebookTxt,
                     onPressed: () {
                     },
                     imgPath: CustomImagesPath.lgFacebookImage,
                   ),
                   CustomGoogleButton(
-                    themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgGoogleTxt,
                     onPressed: () {
                     },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
-import 'package:kabar/model_view/theme_provider.dart';
 import 'package:kabar/views/country_screen.dart';
 import 'package:kabar/views/forget_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
@@ -24,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -144,14 +142,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomGoogleButton(
-                    themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgFacebookTxt,
                     onPressed: () {
                     },
                     imgPath: CustomImagesPath.lgFacebookImage,
                   ),
                   CustomGoogleButton(
-                    themeProvider: themeProvider,
                     buttonTitle: AppConstants.lgGoogleTxt,
                     onPressed: () {
                     },

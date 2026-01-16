@@ -5,10 +5,15 @@ class AppTheme {
   static const primaryColor = Color(0xFF1877F2);
   static const errorColor = Color(0xFFC30052);
   static const greyColor = Color(0xFFEEF1F4);
+  static const darkModeWhite = Color(0xFFB0B3B8);
   static const blackColor = Color(0xFF000000);
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: Color(0xFF4E4B66),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.blue,
+      brightness: Brightness.light,
+    ),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
@@ -90,6 +95,10 @@ class AppTheme {
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.blue,
+      brightness: Brightness.dark,
+    ),
     primaryColor: Color(0xFFE4E6EB),
     scaffoldBackgroundColor: Color(0xFF1C1E21),
     appBarTheme: const AppBarTheme(

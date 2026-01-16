@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kabar/views/news_source_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
 import 'package:kabar/views/widgets/CustomLoginButton.dart';
-import 'package:provider/provider.dart';
 
 import '../helpers/constants.dart';
-import '../model_view/theme_provider.dart';
 import '../models/chips_model.dart';
 
 class TopicsScreen extends StatefulWidget {
@@ -34,7 +32,6 @@ class _TopicsScreenState extends State<TopicsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
     final size = MediaQuery
         .of(context)
         .size;
@@ -62,9 +59,9 @@ class _TopicsScreenState extends State<TopicsScreen> {
                         .textTheme
                         .bodyMedium!
                         .copyWith(
-                      color: themeProvider.isDark(context)
-                          ? Colors.white
-                          : Colors.black,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppTheme.darkModeWhite
+                          : AppTheme.blackColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

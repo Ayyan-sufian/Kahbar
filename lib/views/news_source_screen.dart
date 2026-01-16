@@ -8,7 +8,6 @@ import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:provider/provider.dart';
 import 'package:svg_flutter/svg.dart';
 
-import '../model_view/theme_provider.dart';
 import '../models/news_model.dart';
 
 class NewsSourceScreen extends StatefulWidget {
@@ -26,11 +25,8 @@ class _NewsSourceScreenState extends State<NewsSourceScreen> {
 
 
 
-
-
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
     final size = MediaQuery.of(context).size;
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
@@ -61,9 +57,6 @@ class _NewsSourceScreenState extends State<NewsSourceScreen> {
                   Text(
                     AppConstants.nssHeadingTxt,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: themeProvider.isDark(context)
-                          ? Colors.white
-                          : Colors.black,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -78,9 +71,6 @@ class _NewsSourceScreenState extends State<NewsSourceScreen> {
                     onPressed: () {},
                     icon: Icon(
                       Icons.search,
-                      color: themeProvider.isDark(context)
-                          ? Colors.white
-                          : Colors.black,
                     ),
                   ),
                 ),
@@ -168,13 +158,12 @@ class Cards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
-        color: themeProvider.isDark(context)
-            ? Color(0xFF3A3B3C)
-            : Color(0xFFFAFAFA),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? AppTheme.darkModeWhite
+            : AppTheme.blackColor,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
@@ -182,9 +171,9 @@ class Cards extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: themeProvider.isDark(context)
-                    ? const Color(0x4FE8EAC3)
-                    : AppTheme.greyColor,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppTheme.darkModeWhite
+                    : AppTheme.blackColor,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: CircleAvatar(

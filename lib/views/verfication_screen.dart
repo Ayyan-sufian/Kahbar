@@ -3,10 +3,8 @@ import 'package:kabar/views/rest_pass_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
 import 'package:kabar/views/widgets/CustomLoginButton.dart';
 import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
 
 import '../helpers/constants.dart';
-import '../model_view/theme_provider.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String email;
@@ -63,7 +61,6 @@ class _VerificationScreenState extends State<VerificationScreen>
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
     final size = MediaQuery.of(context).size;
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
@@ -95,10 +92,10 @@ class _VerificationScreenState extends State<VerificationScreen>
                           AppConstants.vsOtpTxt,
                           style: Theme.of(context).textTheme.headlineMedium!
                               .copyWith(
-                                color: themeProvider.isDark(context)
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? AppTheme.darkModeWhite
+                                : AppTheme.blackColor,
+                          ),
                         ),
                         SizedBox(height: 5),
                         Text(
@@ -161,10 +158,9 @@ class _VerificationScreenState extends State<VerificationScreen>
                                     6,
                                   ),
                                   border: Border.all(
-                                    color: themeProvider.isDark(context)
-                                        ? Color(0xFFB0B3B8)
-                                        : Color(0xFF4E4B66),
-                                  ),
+                                    color: Theme.of(context).brightness == Brightness.dark
+                                        ? AppTheme.darkModeWhite
+                                        : AppTheme.blackColor,                                  ),
                                 ),
                               ),
                             ),

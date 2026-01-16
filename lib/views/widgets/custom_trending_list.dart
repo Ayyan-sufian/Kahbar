@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kabar/helpers/constants.dart';
-import 'package:kabar/model_view/theme_provider.dart';
+import 'package:kabar/model_view/theme_bloc/theme_bloc.dart';
 import 'package:kabar/models/artical_model.dart';
 import 'package:kabar/views/theme/app_theme.dart';
 import 'package:svg_flutter/svg_flutter.dart';
@@ -9,14 +10,12 @@ class CustomTrendingList extends StatelessWidget {
   const CustomTrendingList({
     super.key,
     required this.articlesCard,
-    required this.themeProvider,
     required this.imagePath,
     required this.title,
     required this.name,
   });
 
   final List<ArticleModel> articlesCard;
-  final ThemeProvider themeProvider;
   final String imagePath;
   final String title;
   final String name;
@@ -56,8 +55,8 @@ class CustomTrendingList extends StatelessWidget {
             Text(
               name,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: themeProvider.isDark(context)
-                    ? AppTheme.greyColor
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppTheme.darkModeWhite
                     : AppTheme.blackColor,
               ),
             ),
