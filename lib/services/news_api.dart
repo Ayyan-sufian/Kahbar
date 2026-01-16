@@ -12,7 +12,7 @@ class NewsApi {
   NewsApi._internal() {
     dio = Dio(
       BaseOptions(
-        baseUrl: Endpoints.baseUrl,
+        baseUrl: 'https://newsapi.org/v2',
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         headers: {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/article_view_model.dart';
+import 'package:kabar/model_view/articles_bloc.dart';
 import 'package:kabar/model_view/theme_provider.dart';
 import 'package:kabar/views/widgets/custom_trending_list.dart';
 import 'package:provider/provider.dart';
@@ -55,17 +57,34 @@ class _TrendingScreenState extends State<TrendingScreen> {
             else
               Expanded(
                 child: ListView.builder(
-                  itemCount: articleVM.articles.length,
-                  itemBuilder: (context, index) {
-                    return CustomTrendingList(
-                      articlesCard: articleVM.articles,
-                      themeProvider: themeProvider,
-                      imagePath: articleVM.articles[index].urlToImage,
-                      title: articleVM.articles[index].title,
-                      name: articleVM.articles[index].name,
-                    );
-                  },
+                  itemBuilder: (context, index) => BlocBuilder<ArticlesBloc, ArticlesState>(
+                    builder: (context, state) {
+
+                      if (state is ArticleLoaded) {
+                        return ListView.builder(
+                          itemCount: state.articles.length,
+                          itemBuilder: (_, index) {
+                            return Text(state.articles[index].title);
+                          },
+                        );
+                      }
+
+                      return const SizedBox();
+                    },
+                  ),
                 ),
+                // child: ListView.builder(
+                //   itemCount: articleVM.articles.length,
+                //   itemBuilder: (context, index) {
+                //     return CustomTrendingList(
+                //       articlesCard: articleVM.articles,
+                //       themeProvider: themeProvider,
+                //       imagePath: articleVM.articles[index].urlToImage,
+                //       title: articleVM.articles[index].title,
+                //       name: articleVM.articles[index].name,
+                //     );
+                //   },
+                // ),
               ),
           ],
         ),

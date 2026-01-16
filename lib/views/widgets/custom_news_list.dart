@@ -36,7 +36,10 @@ class CustomNewsList extends StatelessWidget {
               width: 100,
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) =>
-                  const Icon(Icons.broken_image, size: 40),
+                   SizedBox(
+                       height: 100,
+                       width: 100,
+                       child: Image.asset("assets/img/place_holder.png")),
             ),
           ),
           const SizedBox(width: 12),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/theme_provider.dart';
 import 'package:kabar/models/artical_model.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:svg_flutter/svg.dart';
 
 import '../model_view/article_view_model.dart';
+import '../model_view/articles_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,145 +29,167 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ArticleViewModel>().fetchArticles();
+        context.read<ArticlesBloc>().add(FetchArticlesEvent());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
-    final articleVM = context.watch<ArticleViewModel>();
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 100,
-                    width: 150,
-                    child: SvgPicture.asset(CustomImagesPath.appLogoImage),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.notifications_none),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 48,
-                child: TextField(
-                  controller: searchHomeController,
-                  decoration: InputDecoration(
-                    hintText: AppConstants.ctrHintTxt,
-                    prefixIcon: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.search,
-                        color: themeProvider.isDark(context)
-                            ? Colors.white
-                            : Colors.black,
+    //final articleVM = context.watch<ArticleViewModel>();
+    return
+      Scaffold(
+      body: BlocBuilder<ArticlesBloc, ArticlesState>(
+        builder: (context, state) {
+          if (state is ArticleLoaded) {
+            final articleVM = state.articles;
+
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 100,
+                          width: 150,
+                          child: SvgPicture.asset(CustomImagesPath
+                              .appLogoImage),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.notifications_none),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 48,
+                      child: TextField(
+                        controller: searchHomeController,
+                        decoration: InputDecoration(
+                          hintText: AppConstants.ctrHintTxt,
+                          prefixIcon: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.search,
+                              color: themeProvider.isDark(context)
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: () {},
+                            icon: SvgPicture.asset(
+                                CustomImagesPath.hpsMenuImage),
+                          ),
+                        ),
                       ),
                     ),
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(CustomImagesPath.hpsMenuImage),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppConstants.hpsTrendingTxt,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: themeProvider.isDark(context)
-                          ? AppTheme.greyColor
-                          : AppTheme.blackColor,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TrendingScreen(),
+                    SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppConstants.hpsTrendingTxt,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                            color: themeProvider.isDark(context)
+                                ? AppTheme.greyColor
+                                : AppTheme.blackColor,
+                          ),
                         ),
-                      );
-                    },
-                    child: Text(
-                      AppConstants.hpsSeeAllTxt,
-                      style: Theme.of(context).textTheme.bodySmall,
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TrendingScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppConstants.hpsSeeAllTxt,
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .bodySmall,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(height: 12),
+
+                    if (state is ArticleLoaded)
+                      CustomTrendingList(
+                        articlesCard: state.articles,
+                        themeProvider: themeProvider,
+                        imagePath: state.articles.first.urlToImage,
+                        title: state.articles.first.title,
+                        name: state.articles.first.name,
+                      ),
+
+                    SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppConstants.hpsLatestTxt,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                            color: themeProvider.isDark(context)
+                                ? AppTheme.greyColor
+                                : AppTheme.blackColor,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => LatestNewsScreen(),));
+                          },
+                          child: Text(
+                            AppConstants.hpsSeeAllTxt,
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .bodySmall,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    if (state.articles.length > 2)
+                      CustomNewsList(
+                        articlesCard: articleVM,
+                        themeProvider: themeProvider,
+                        imagePath: articleVM[2].urlToImage,
+                        title: articleVM[2].title,
+                        name: articleVM[2].name,
+                      ),
+
+                    if (articleVM.length > 3)
+                      CustomNewsList(
+                        articlesCard: articleVM,
+                        themeProvider: themeProvider,
+                        imagePath: articleVM[3].urlToImage,
+                        title: articleVM[3].title,
+                        name: articleVM[3].name,
+                      ),
+                  ],
+                ),
               ),
-              SizedBox(height: 12),
-
-              if (articleVM.isLoading)
-                const CircularProgressIndicator()
-              else if (articleVM.articles.isEmpty)
-                const Text("No articles found")
-              else ...[
-                CustomTrendingList(
-                  articlesCard: articleVM.articles,
-                  themeProvider: themeProvider,
-                  imagePath: articleVM.articles.first.urlToImage,
-                  title: articleVM.articles.first.title,
-                  name: articleVM.articles.first.name,
-                ),
-              ],
-
-              SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppConstants.hpsLatestTxt,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: themeProvider.isDark(context)
-                          ? AppTheme.greyColor
-                          : AppTheme.blackColor,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => LatestNewsScreen(),));
-                    },
-                    child: Text(
-                      AppConstants.hpsSeeAllTxt,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 12),
-              if (articleVM.articles.length > 2)
-                CustomNewsList(
-                  articlesCard: articleVM.articles,
-                  themeProvider: themeProvider,
-                  imagePath: articleVM.articles[2].urlToImage,
-                  title: articleVM.articles[2].title,
-                  name: articleVM.articles[2].name,
-                ),
-
-              if (articleVM.articles.length > 3)
-                CustomNewsList(
-                  articlesCard: articleVM.articles,
-                  themeProvider: themeProvider,
-                  imagePath: articleVM.articles[3].urlToImage,
-                  title: articleVM.articles[3].title,
-                  name: articleVM.articles[3].name,
-                ),
-            ],
+            );
+          }
+          return SizedBox();
+        }
           ),
-        ),
-      ),
     );
   }
 }

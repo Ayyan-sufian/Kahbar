@@ -9,7 +9,7 @@ class NewsApiService {
   Future<Response> getNews() async {
     try {
       return await _dio.get(
-        Endpoints.getNewsApiPath,
+        '/top-headlines',
         queryParameters: {'apiKey': apiKey},
       );
     } on DioException catch (e) {
@@ -17,10 +17,11 @@ class NewsApiService {
     }
   }
 
-  Future<Response> getArticles(Map<String,dynamic> query,String path) async {
+  Future<Response> getArticles(
+      Map<String,dynamic> query,String path) async {
     try {
      return _dio.get(
-        path,
+         path,
         queryParameters: query
       );
     } on DioException catch (e) {

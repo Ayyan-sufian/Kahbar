@@ -30,10 +30,13 @@ class CustomTrendingList extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
           child: Image.network(
-            imagePath ?? '',
+            imagePath ?? 'https://via.placeholder.com/150',
             height: 100,
             width: 100,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Image.asset('assets/img/place_holder.png');
+            },
           ),
         ),
         const SizedBox(height: 12),

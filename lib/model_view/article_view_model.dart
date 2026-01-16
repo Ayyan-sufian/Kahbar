@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/models/artical_model.dart';
 import 'package:kabar/services/news_api_service.dart';
+
 
 class ArticleViewModel extends ChangeNotifier{
   List<ArticleModel> _articles = [];
@@ -21,7 +23,13 @@ class ArticleViewModel extends ChangeNotifier{
         'apiKey': Endpoints.apiKey,
       };
       final response = await NewsApiService().getArticles(query, Endpoints.articleApiPath);
+
+      if (response.data == null || response.data['articles'] == null) {
+        throw Exception(response.data?['message'] ?? 'Articles not found');
+      }
+
       final List articlesList = response.data['articles'];
+
 
       _articles =
           articlesList.map((json) => ArticleModel.fromJson(json)).toList();
