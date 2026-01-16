@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/theme_provider.dart';
-import 'package:kabar/models/artical_model.dart';
-import 'package:kabar/services/news_api_service.dart';
 import 'package:kabar/views/leatest_news_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
 import 'package:kabar/views/trending_screen.dart';
