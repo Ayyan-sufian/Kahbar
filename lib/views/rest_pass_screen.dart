@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/views/congratulations_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomLoginButton.dart';
+import 'package:kabar/views/widgets/custom_login_button.dart';
 
 class RestPassScreen extends StatefulWidget {
   const RestPassScreen({super.key});

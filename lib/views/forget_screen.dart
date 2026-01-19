@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/views/verfication_screen.dart';
-import 'package:kabar/views/widgets/CustomLoginButton.dart';
+import 'package:kabar/views/widgets/custom_login_button.dart';
 
 class ForgetScreen extends StatefulWidget {
   const ForgetScreen({super.key});

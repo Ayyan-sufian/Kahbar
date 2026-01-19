@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/views/rest_pass_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomLoginButton.dart';
+import 'package:kabar/views/widgets/custom_login_button.dart';
 import 'package:pinput/pinput.dart';
 
 import '../helpers/constants.dart';

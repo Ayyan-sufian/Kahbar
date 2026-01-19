@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/views/login_screen.dart';
-import 'package:kabar/views/widgets/CustomLoginButton.dart';
+import 'package:kabar/views/widgets/custom_login_button.dart';
 import 'package:provider/provider.dart';
 
 import 'theme/app_theme.dart';
-import 'widgets/CustomGoogleButton.dart';
+import 'widgets/custom_google_button.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

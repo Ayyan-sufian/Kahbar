@@ -5,7 +5,7 @@ import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/model_view/theme_bloc/theme_bloc.dart';
 import 'package:kabar/views/theme/app_theme.dart' show AppTheme;
 import 'package:kabar/views/topics_screen.dart';
-import 'package:kabar/views/widgets/CustomLoginButton.dart';
+import 'package:kabar/views/widgets/custom_login_button.dart';
 import 'package:provider/provider.dart';
 
 class CounterScreen extends StatefulWidget {

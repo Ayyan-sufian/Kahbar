@@ -3,10 +3,9 @@ import 'package:kabar/helpers/constants.dart';
 import 'package:kabar/views/country_screen.dart';
 import 'package:kabar/views/forget_screen.dart';
 import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomGoogleButton.dart';
-import 'package:kabar/views/widgets/CustomLoginButton.dart';
+import 'package:kabar/views/widgets/custom_google_button.dart';
+import 'package:kabar/views/widgets/custom_login_button.dart';
 import 'package:kabar/views/sign_up_screen.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

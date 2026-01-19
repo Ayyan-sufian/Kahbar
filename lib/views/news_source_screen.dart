@@ -4,7 +4,7 @@ import 'package:kabar/models/artical_model.dart';
 import 'package:kabar/services/news_api_service.dart';
 import 'package:kabar/views/home_page.dart';
 import 'package:kabar/views/theme/app_theme.dart';
-import 'package:kabar/views/widgets/CustomLoginButton.dart';
+import 'package:kabar/views/widgets/custom_login_button.dart';
 import 'package:provider/provider.dart';
 import 'package:svg_flutter/svg.dart';
 
