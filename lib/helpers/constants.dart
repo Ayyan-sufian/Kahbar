@@ -105,5 +105,5 @@ class Endpoints{
   static const String apiKey = "c440e5e558544b739cf4f6546604c475";
   static const String baseUrl = "https://newsapi.org/v2";
   static const String getNewsApiPath = "/top-headlines/sources";
-  static const String articleApiPath = "/top-headlines/sources";
+  static const String articleApiPath = "/top-headlines";
 }

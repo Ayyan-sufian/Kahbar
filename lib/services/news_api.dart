@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:kabar/helpers/constants.dart';
+import 'package:kabar/helpers/news_interceptor.dart';
 
 class NewsApi {
   static final NewsApi _instance = NewsApi._internal();
@@ -20,5 +21,7 @@ class NewsApi {
         },
       ),
     );
+
+    dio.interceptors.add(NewsInterceptor());
   }
 }
